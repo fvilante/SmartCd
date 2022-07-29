@@ -1,9 +1,10 @@
 /*
-  TODO:
+  TODO: (unordered)
     - do not append if function already exists (double append)
     - implement uninstaller
     - test on others PS versions and enviroments
     - confirm pwsh.exe version and location is the correct one (scan for multiple versions in the path)
+    - Make the path to main.ts file flexible based on client folder structure
 */
 
 import { dirname } from "https://deno.land/std@0.150.0/path/mod.ts";
@@ -36,10 +37,13 @@ const getProfileFilePath = async ():Promise<string> => {
 
 const changeProfileFile = async (profileFileFullPath:string):Promise<void> => {
     const newData =  `
-    function SmartCD_SetLocation {
-        deno run "C:\\Mesa_de_Trabalho\\Software\\smartCD\\smartcd_cli.ts" 
-    }   
-    Set-Alias -name cd -value SmartCD_SetLocation -Option AllScope
+    function Set-FVLocation{
+      param(
+        $Arguments
+      )
+      deno run "C:\\Mesa_de_Trabalho\\Software\\smartCD\\smartcd_cli.ts" $Arguments | Set-Location
+    }
+    Set-Alias -name cd -value Set-FVLocation -Option AllScope
     `
     const fileFullPath = profileFileFullPath;
     //open file: create if doesn't exist, append if exists
