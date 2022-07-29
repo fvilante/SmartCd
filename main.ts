@@ -15,7 +15,6 @@ const getProfileFilePath = async ():Promise<string> => {
         const result = (new TextDecoder().decode(rawOutput)).trim()
         const path = result.replaceAll('{','').replaceAll('}',''); // fix: why this step is even necessary?]
         const response = dirname(path)+'\\profile.ps1'
-        //const profilePath = home + '\\Documents\\PowerShell\\profile.ps1'
         //todo: I should add a step to check if the fetched data is a valid file path.
         return response
         
