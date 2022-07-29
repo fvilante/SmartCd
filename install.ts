@@ -1,3 +1,11 @@
+/*
+  TODO:
+    - do not append if function already exists (double append)
+    - implement uninstaller
+    - test on others PS versions and enviroments
+    - confirm pwsh.exe version and location is the correct one (scan for multiple versions in the path)
+*/
+
 import { dirname } from "https://deno.land/std@0.150.0/path/mod.ts";
 
 const getProfileFilePath = async ():Promise<string> => {
@@ -14,7 +22,7 @@ const getProfileFilePath = async ():Promise<string> => {
         const rawOutput = await p.output();
         const result = (new TextDecoder().decode(rawOutput)).trim()
         const path = result.replaceAll('{','').replaceAll('}',''); // fix: why this step is even necessary?]
-        const response = dirname(path)+'\\profile.ps1'
+        const response = dirname(path)+'\\profile.ps1' //fix: is this a stable solution?
         //todo: I should add a step to check if the fetched data is a valid file path.
         return response
         
@@ -28,8 +36,10 @@ const getProfileFilePath = async ():Promise<string> => {
 
 const changeProfileFile = async (profileFileFullPath:string):Promise<void> => {
     const newData =  `
-# testando
-echo foo_bar_11H33m
+    function SmartCD_SetLocation {
+        deno run "C:\\Mesa_de_Trabalho\\Software\\smartCD\\smartcd_cli.ts" 
+    }   
+    Set-Alias -name cd -value SmartCD_SetLocation -Option AllScope
     `
     const fileFullPath = profileFileFullPath;
     //open file: create if doesn't exist, append if exists
@@ -41,8 +51,12 @@ echo foo_bar_11H33m
 
 
 // await its completion
+console.log('Waiting installing...')
 const file = await getProfileFilePath()
 console.log(file);
+changeProfileFile(file)
+  .then( () => {
+    console.log(`instaled!`);
+  });
 
-const x = changeProfileFile(file);
 
