@@ -1,0 +1,1 @@
+console.log(`Deno has received this arguments ${Deno.args}`);
