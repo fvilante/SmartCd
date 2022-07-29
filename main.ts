@@ -24,17 +24,26 @@ const main = async () => {
     Deno.chdir(path)
     console.log(`path corrent depois ${Deno.cwd()}`)
 
-    
+    //powershell -NoProfile -Command {$profile.CurrentUserAllHosts}
     // define command used to create the subprocess
-    const cmd = ["notepad"];
-
-
-
+    const cmd = ["powershell.exe","-Command", '"{$profile}"'];
+    
     // create subprocess
-    const p = Deno.run({ cmd });
+    const p = Deno.run({ cmd, stdin: 'piped', stdout: 'piped', stderr: 'piped' });
 
     // await its completion
-    await p.status();
+    const { code } = await p.status();
+
+    if (code === 0) {
+        const rawOutput = await p.output();
+        await Deno.stdout.write(rawOutput);
+      } else {
+        const rawError = await p.stderrOutput();
+        const errorString = new TextDecoder().decode(rawError);
+        console.log(errorString);
+      }
+
+      Deno.exit(code);
 
 }
 
