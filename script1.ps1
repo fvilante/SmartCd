@@ -1,0 +1,1 @@
+$PROFILE | Select-Object *Host* | Format-List > "C:\Mesa_de_Trabalho\Software\smartCD\juca.txt"
