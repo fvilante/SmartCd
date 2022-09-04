@@ -13,6 +13,7 @@ import {
 const main = (args: string[]):string => {
     if (args.length===0) return ""
     const [currentPath, nextPath, ..._otherArgs] = args
+    if (nextPath===undefined) return ""
     const assertion1 = isAbsolute(currentPath);
     if(!assertion1) {
         throw new Error(`Current directory ${currentPath} must be absolute`)
