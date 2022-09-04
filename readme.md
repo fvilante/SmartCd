@@ -1,19 +1,25 @@
-version 0.0.1-pre-alpha (Not ready to use in production)
+# Read Me First
 
-Please do not use yet, main functionalities must be introduced.
+version 0.0.1-pre-alpha (Not ready to use in production!)
 
-Currently it just grabs your cd native command and transparently do basically nothing.
+My purpose with this project is to have fun implementing something simple from scratch using [Deno](https://deno.land/).
 
-If you are interested in Deno development, navigate through the code to see earlier stages code.
+The experience of implementing this project since the initial idea to its current state is being shared publicly through [this tweet thread](https://twitter.com/FlavioVilante/status/1552799001644351488?s=20&t=r4eV_Bdrnc_9ILNpy1bhIg) 
+
+Currently the program functionality just does nothing. More precisely it does something, but the net effect is equivalent to nothing (What in Category Theory is called Identity Morphism). In next versions some functionalities will be introduced.
+
+You can follow/talk to me on twitter at [@FlavioVilante](https://twitter.com/FlavioVilante).
+
+If you want to experiment alfa version follow below instructions.
 
 ---
 
 
 # Objective
 
-Facilitate the proccess of navigating between directories in the Powershell command line.
+This program aim facilitate the proccess of navigating between directories in the Powershell command line.
 
-Inspired in: zoxide, autojump, z-location, among others.
+Inspired in: [zoxide](https://github.com/ajeetdsouza/zoxide), [autojump](https://github.com/wting/autojump), [z-location](https://github.com/vors/ZLocation), [among others](https://twitter.com/FlavioVilante/status/1555757349599592453?s=20&t=r4eV_Bdrnc_9ILNpy1bhIg).
 
 # Install Dependencies
 
@@ -48,7 +54,7 @@ typescript 4.7.4
 Once you have all dependencies in your machine, type below on your terminal:
 
 ```powershell
-> deno install -f .\smart-cd.ts
+> deno install -f https://raw.githubusercontent.com/fvilante/SmartCd/master/smart-cd.ts
 ``` 
 
 The result on screen should be:
